@@ -17,7 +17,14 @@ This Spring Boot application logs events into a local `logs/` folder and automat
 - Files are uploaded to S3 when they exceed 200 KB or after 60 seconds.  
 
 # Testing  
-- Run `log_flood.bat` to generate logs rapidly.  
+- Run `log_flood.bat` to generate logs rapidly.
+- If the file exceeds MAX_FILE_SIZE, it is uploaded to S3, and a new file is created.
+Every 60 seconds, the system checks the file:
+ - Uploads if modified and not empty.
+ - Skips upload if unchanged.
+Handling Server Restarts
+On restart, the service reuses the latest log file under MAX_FILE_SIZE instead of creating a new one.
+If no valid file exists, a new file is created.
 - Monitor the `logs/` folder and check S3 uploads.  
 
 # Troubleshooting  
