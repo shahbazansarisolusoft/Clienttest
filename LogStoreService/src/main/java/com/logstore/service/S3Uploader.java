@@ -29,31 +29,11 @@ public class S3Uploader {
 	}
 
 	public void uploadToS3(File file) {
-		String key = "devarsh_logs/" + file.getName();
+		String key = "logs/" + file.getName();
 		PutObjectRequest putObjectRequest = PutObjectRequest.builder().bucket(bucketName).key(key).build();
 		s3Client.putObject(putObjectRequest, RequestBody.fromFile(Paths.get(file.getAbsolutePath())));
 
 		// Delete file after upload
 //		file.delete();
 	}
-	
-	public void uploadToS3(File file, String s3Folder) {
-	    // Ensure the folder path ends with "/"
-	    if (!s3Folder.endsWith("/")) {
-	        s3Folder += "/";
-	    }
-
-	    // Correctly append the file name
-	    String key = s3Folder + file.getName(); 
-
-        PutObjectRequest putObjectRequest = PutObjectRequest.builder()
-                .bucket(bucketName)
-                .key(key)
-                .build();
-
-        s3Client.putObject(putObjectRequest, RequestBody.fromFile(Paths.get(file.getAbsolutePath())));
-
-        // Delete file after upload (optional)
-        // file.delete();
-    }
 }
