@@ -1,4 +1,4 @@
-Log Store Service - Compressed Version  
+Log Store Service
 
 # Overview  
 This Spring Boot application logs events into a local `logs/` folder and automatically uploads them to Amazon S3 when the file size exceeds 200 KB (configurable). It uses BlockingQueue for efficient log handling.  
